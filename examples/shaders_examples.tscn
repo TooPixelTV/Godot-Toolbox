@@ -1,0 +1,60 @@
+[gd_scene load_steps=12 format=3 uid="uid://bsye15yk3ipwl"]
+
+[ext_resource type="Shader" path="res://shaders/color_mix.gdshader" id="1_s3y3r"]
+[ext_resource type="Texture2D" uid="uid://caymr5s5l0sys" path="res://icon.svg" id="2_36tfh"]
+[ext_resource type="Shader" path="res://shaders/dissolve.gdshader" id="3_qd78y"]
+[ext_resource type="Shader" path="res://shaders/distorsion.gdshader" id="4_br8kd"]
+[ext_resource type="Shader" path="res://shaders/pixelize.gdshader" id="5_ncymw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hgesy"]
+shader = ExtResource("1_s3y3r")
+shader_parameter/color = Color(1, 0, 0, 1)
+shader_parameter/amount = 0.5
+shader_parameter/transparency_threshold = 0.01
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_8axqq"]
+noise_type = 3
+frequency = 0.005
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_p2xur"]
+noise = SubResource("FastNoiseLite_8axqq")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vagp5"]
+shader = ExtResource("3_qd78y")
+shader_parameter/dissolve_amount = 0.595
+shader_parameter/edge_color = Color(1, 0.785, 0.14, 1)
+shader_parameter/edge_thickness = 0.1
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_p2xur")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jtpjc"]
+shader = ExtResource("4_br8kd")
+shader_parameter/wave_speed = 2.467
+shader_parameter/wave_intensity = 0.037
+shader_parameter/wave_frequency = 3.349
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bo1hi"]
+shader = ExtResource("5_ncymw")
+shader_parameter/pixel_size = 0.337
+
+[node name="ShadersExamples" type="Node"]
+
+[node name="ColorMix" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_hgesy")
+position = Vector2(100, 325)
+texture = ExtResource("2_36tfh")
+
+[node name="Dissolve" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_vagp5")
+position = Vector2(300, 325)
+texture = ExtResource("2_36tfh")
+
+[node name="Distorsion" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_jtpjc")
+position = Vector2(500, 325)
+texture = ExtResource("2_36tfh")
+region_rect = Rect2(0, 0, 500, 500)
+
+[node name="Pixelize" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_bo1hi")
+position = Vector2(700, 325)
+texture = ExtResource("2_36tfh")

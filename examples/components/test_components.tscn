@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://d3dde3311dcqd"]
+
+[ext_resource type="Texture2D" uid="uid://caymr5s5l0sys" path="res://icon.svg" id="1_6ourc"]
+[ext_resource type="Script" path="res://examples/components/test_components.gd" id="1_hxisk"]
+[ext_resource type="Script" path="res://examples/components/health_c.gd" id="2_metm6"]
+[ext_resource type="PackedScene" uid="uid://d2vy4vn43o506" path="res://examples/components/health_uic.tscn" id="3_uxjix"]
+
+[node name="TestComponents" type="Node2D"]
+script = ExtResource("1_hxisk")
+
+[node name="Character" type="Node2D" parent="."]
+position = Vector2(500, 350)
+
+[node name="Sprite2D" type="Sprite2D" parent="Character"]
+texture = ExtResource("1_6ourc")
+
+[node name="HealthC" type="Node" parent="Character"]
+script = ExtResource("2_metm6")
+
+[node name="HealthUIC" parent="Character" instance=ExtResource("3_uxjix")]
+
+[node name="AddHealth" type="Button" parent="."]
+custom_minimum_size = Vector2(150, 0)
+offset_left = 181.0
+offset_top = 244.0
+offset_right = 276.0
+offset_bottom = 275.0
+text = "Add Health"
+
+[node name="RemoveHealth" type="Button" parent="."]
+custom_minimum_size = Vector2(150, 0)
+offset_left = 181.0
+offset_top = 289.14
+offset_right = 276.0
+offset_bottom = 320.14
+text = "Remove Health"
+
+[connection signal="pressed" from="AddHealth" to="." method="_on_add_health_pressed"]
+[connection signal="pressed" from="RemoveHealth" to="." method="_on_remove_health_pressed"]

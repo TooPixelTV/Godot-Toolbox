@@ -1,0 +1,52 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckui6gfmrx8iy"]
+
+[ext_resource type="Script" path="res://examples/fade_transition/scene_1.gd" id="1_tu7bp"]
+[ext_resource type="PackedScene" uid="uid://denj73wx3knos" path="res://utils/fade_transition/fade_transition.tscn" id="2_iu5cd"]
+
+[node name="Scene1" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tu7bp")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.5
+offset_top = -11.5
+offset_right = 31.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 136
+text = "SCENE 1"
+
+[node name="Button" type="Button" parent="."]
+custom_minimum_size = Vector2(450, 150)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -225.0
+offset_top = -227.545
+offset_right = 225.0
+offset_bottom = -77.545
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 50
+text = "Change Scene"
+
+[node name="FadeTransition" parent="." instance=ExtResource("2_iu5cd")]
+fade_duration = 0.5
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="fade_complete" from="FadeTransition" to="." method="_on_fade_transition_fade_complete"]
