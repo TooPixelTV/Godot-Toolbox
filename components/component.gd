@@ -17,6 +17,10 @@ func get_component(component_type):
 	
 	return results[0]
 
+static func get_child_component(element: Node, component_type: Script) -> Component:
+	return element.get_children()\
+			.filter(func (e): return is_instance_of(e, component_type) and is_instance_of(e, Component))[0]
+
 func required_components_warning(component_types: Array[Variant]) -> PackedStringArray:
 	var result: PackedStringArray = []
 	
@@ -27,4 +31,3 @@ func required_components_warning(component_types: Array[Variant]) -> PackedStrin
 			result.append("Missing " + instance.component_name + " component.")
 	
 	return result
-	
