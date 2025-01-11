@@ -1,11 +1,14 @@
 extends Node
 class_name BackgroundMusic
 
+@export var transition_speed: float = 1.0
+
 @onready var audio_stream_player_1: AudioStreamPlayer = $AudioStreamPlayer1
 @onready var audio_stream_player_2: AudioStreamPlayer = $AudioStreamPlayer2
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 func crossfade_to(audio_stream: AudioStream) -> void:
+	animation_player.speed_scale = transition_speed
 	if audio_stream_player_2.playing:
 		audio_stream_player_1.stream = audio_stream
 		audio_stream_player_1.play()
